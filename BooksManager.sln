@@ -19,17 +19,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 - Data", "5.1 - Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrossCutting", "5.2 - CrossCutting", "{99D329CA-5922-4599-A588-CCA08519D392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Infra.CrossCutting.IoC", "src\BooksManager.Infra.CrossCutting.IoC\BooksManager.Infra.CrossCutting.IoC.csproj", "{9760629A-DB0A-4D02-B5D4-756B078FA0FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManager.Infra.CrossCutting.IoC", "src\BooksManager.Infra.CrossCutting.IoC\BooksManager.Infra.CrossCutting.IoC.csproj", "{9760629A-DB0A-4D02-B5D4-756B078FA0FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Infra.Data", "src\BooksManager.Infra.Data\BooksManager.Infra.Data.csproj", "{53F15F8E-6AA9-4950-B612-554801528842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManager.Infra.Data", "src\BooksManager.Infra.Data\BooksManager.Infra.Data.csproj", "{53F15F8E-6AA9-4950-B612-554801528842}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Domain", "src\BooksManager.Domain\BooksManager.Domain.csproj", "{BD3B039F-868D-477A-8A20-B43DDDFB0A0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManager.Domain", "src\BooksManager.Domain\BooksManager.Domain.csproj", "{BD3B039F-868D-477A-8A20-B43DDDFB0A0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Application", "src\BooksManager.Application\BooksManager.Application.csproj", "{3BA52A44-BB27-455F-977D-30B046DB9D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManager.Application", "src\BooksManager.Application\BooksManager.Application.csproj", "{3BA52A44-BB27-455F-977D-30B046DB9D04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{6FFCE6DB-1F81-43D4-83E7-E6EDDBDEB204}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BooksManager.Scripts", "sql\BooksManager.Scripts\BooksManager.Scripts.sqlproj", "{71DC05DD-F695-43AC-86EE-6B05FBD4DD5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Site", "src\BooksManager.Site\BooksManager.Site.csproj", "{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManager.Domain.Tests", "tests\BooksManager.Domain.Tests\BooksManager.Domain.Tests.csproj", "{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,14 @@ Global
 		{71DC05DD-F695-43AC-86EE-6B05FBD4DD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71DC05DD-F695-43AC-86EE-6B05FBD4DD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71DC05DD-F695-43AC-86EE-6B05FBD4DD5E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +88,8 @@ Global
 		{BD3B039F-868D-477A-8A20-B43DDDFB0A0C} = {B419DDEE-26BF-463A-A768-4DEC3D2A556A}
 		{3BA52A44-BB27-455F-977D-30B046DB9D04} = {1212364C-EE37-4000-97EB-79528507F3BE}
 		{71DC05DD-F695-43AC-86EE-6B05FBD4DD5E} = {6FFCE6DB-1F81-43D4-83E7-E6EDDBDEB204}
+		{F2FACFD2-903F-43B3-AF2A-BC9EBEE5EC46} = {2B179C6E-1490-4F9F-AD15-955213C5C8C5}
+		{359EDCD3-2C41-417B-B52F-9C0AD2C3EAA5} = {B419DDEE-26BF-463A-A768-4DEC3D2A556A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C59BF75D-F8C2-4353-AEFB-B9B551F73889}

@@ -27,15 +27,5 @@ namespace BooksManager.Infra.Data.Context
 
             base.OnModelCreating(modelBuilder);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
-        }
     }
 }

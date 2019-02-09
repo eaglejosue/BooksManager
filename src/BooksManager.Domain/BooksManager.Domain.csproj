@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="DotNetCore.Objects" Version="6.6.0" />
+    <PackageReference Include="FluentValidation" Version="8.1.3" />
   </ItemGroup>
 
 </Project>

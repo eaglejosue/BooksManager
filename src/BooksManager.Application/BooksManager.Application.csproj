@@ -5,9 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapper\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BooksManager.Domain\BooksManager.Domain.csproj" />
   </ItemGroup>
 
 </Project>
