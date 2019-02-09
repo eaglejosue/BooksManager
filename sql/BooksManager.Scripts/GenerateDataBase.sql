@@ -1,0 +1,6 @@
+﻿USE MASTER
+GO
+
+CREATE DATABASE BooksManager
+GO
+
