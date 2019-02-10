@@ -4,7 +4,6 @@ using DotNetCore.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Threading.Tasks;
 
 namespace BooksManager.Domain.Tests.Customer
 {
