@@ -12,8 +12,9 @@ namespace BooksManager.Domain.Entities
         public decimal Price { get; private set; }
         public ICollection<Booking> Bookings { get; private set; }
 
-        public Book(string name, string description, decimal price)
+        public Book(long id, string name, string description, decimal price)
         {
+            Id = id;
             Name = name;
             Description = description;
             Price = price;

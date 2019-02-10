@@ -26,8 +26,8 @@ namespace BooksManager.Domain.Services
 
         public Task<IResult<IQueryable<Customer>>> GetAllAsync()
         {
-            var customer = _customerRepository.GetAll();
-            return new SuccessResult<IQueryable<Customer>>(customer).ToTask();
+            var allCustomers = _customerRepository.GetAll();
+            return new SuccessResult<IQueryable<Customer>>(allCustomers).ToTask();
         }
 
         public Task<IResult<Customer>> GetByIdAsync(long id)
@@ -38,7 +38,7 @@ namespace BooksManager.Domain.Services
 
         public Task<IResult<Customer>> AddAsync(Customer customer)
         {
-            var customerValidationResult = new AddNewCustomerValidation().Validate(customer);
+            var customerValidationResult = new AddNewBookValidation().Validate(customer);
             if (!customerValidationResult.IsValid)
                 return new ErrorResult<Customer>(customerValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 
@@ -50,7 +50,7 @@ namespace BooksManager.Domain.Services
 
         public Task<IResult<Customer>> UpdateAsync(Customer customer)
         {
-            var customerValidationResult = new UpdateCustomerValidation().Validate(customer);
+            var customerValidationResult = new UpdateBookValidation().Validate(customer);
             if (!customerValidationResult.IsValid)
                 return new ErrorResult<Customer>(customerValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 
@@ -69,7 +69,7 @@ namespace BooksManager.Domain.Services
             var customer = _customerRepository.GetById(id);
             if (customer == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Customer id {customer.Id} not found.");
 
-            var customerValidationResult = new RemoveCustomerValidation().Validate(customer);
+            var customerValidationResult = new RemoveBookValidation().Validate(customer);
             if (!customerValidationResult.IsValid)
                 return new ErrorResult<long>(customerValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 

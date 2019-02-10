@@ -1,4 +1,5 @@
-﻿using BooksManager.Domain.Models;
+﻿using BooksManager.Domain.Exception;
+using BooksManager.Domain.Models;
 using BooksManager.Domain.ValueObjects;
 using System;
 
@@ -28,7 +29,7 @@ namespace BooksManager.Domain.Entities
         public static Booking Create(BookingPeriod bookingPeriod, Book book)
         {
             if (!book.IsAvailable(bookingPeriod))
-                throw new Exception("Livro não disponível.");
+                throw new ExceptionHandler("Livro não disponível.");
 
             var booking = new Booking(bookingPeriod, book);
             return booking;

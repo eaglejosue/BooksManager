@@ -1,4 +1,5 @@
-﻿using BooksManager.Infra.CrossCutting.IoC;
+﻿using AutoMapper;
+using BooksManager.Infra.CrossCutting.IoC;
 using BooksManager.Infra.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,7 @@ namespace BooksManager.Presentation.Site
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddAutoMapper();
 
             services.AddDbContext<BooksManagerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -37,6 +39,7 @@ namespace BooksManager.Presentation.Site
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {

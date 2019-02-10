@@ -3,7 +3,7 @@ using System;
 
 namespace BooksManager.Domain.Validations.Customer
 {
-    public abstract class CustomerValidation<T> : AbstractValidator<T> where T : Entities.Customer
+    public abstract class BookValidation<T> : AbstractValidator<T> where T : Entities.Customer
     {
         protected void ValidateName()
         {

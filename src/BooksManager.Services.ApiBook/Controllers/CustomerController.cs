@@ -8,14 +8,14 @@ namespace BooksManager.Services.ApiBook.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BookController : ApiController
+    public class CustomerController : ApiController
     {
-        private readonly IBookAppService _bookAppService;
+        private readonly ICustomerAppService _customerAppService;
 
-        public BookController(
-            IBookAppService bookAppService)
+        public CustomerController(
+            ICustomerAppService customerAppService)
         {
-            _bookAppService = bookAppService;
+            _customerAppService = customerAppService;
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace BooksManager.Services.ApiBook.Controllers
         {
             try
             {
-                var bookViewModelResult = await _bookAppService.GetByIdAsync(id);
+                var customerViewModelResult = await _customerAppService.GetByIdAsync(id);
 
-                if (bookViewModelResult?.Data == null) return NotFound(new { message = "A problem occurred during getting the data." });
+                if (customerViewModelResult?.Data == null) return NotFound(new { message = "A problem occurred during getting the data." });
 
-                return Ok(bookViewModelResult.Data);
+                return Ok(customerViewModelResult.Data);
             }
             catch (ExceptionHandler exceptionHandler)
             {
@@ -48,7 +48,7 @@ namespace BooksManager.Services.ApiBook.Controllers
         /// <summary>
         /// Método responsável por registrar log com detalhes da homologação
         /// </summary>
-        /// <param name="bookViewModel"></param>
+        /// <param name="customerViewModel"></param>
         /// <response code="201">Created</response>
         /// <response code="400">Bad Request</response>
         /// <response code="401">Unauthorized</response>
@@ -56,19 +56,19 @@ namespace BooksManager.Services.ApiBook.Controllers
         /// <response code="500">Internal Server Error</response>
         /// <returns>Result</returns>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]BookViewModel bookViewModel)
+        public async Task<IActionResult> Post([FromBody]CustomerViewModel customerViewModel)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(new { message = "Invalid model state." });
 
-                var bookViewModelResult = await _bookAppService.AddAsync(bookViewModel);
+                var customerViewModelResult = await _customerAppService.AddAsync(customerViewModel);
 
-                if (bookViewModelResult?.Data == null) return BadRequest(new { message = "A problem occurred during adding the data." });
+                if (customerViewModelResult?.Data == null) return BadRequest(new { message = "A problem occurred during adding the data." });
 
-                var uri = Url.Action("Get", new { id = bookViewModelResult.Data.Id });
+                var uri = Url.Action("Get", new { id = customerViewModelResult.Data.Id });
 
-                return Created(uri, bookViewModelResult.Data);
+                return Created(uri, customerViewModelResult.Data);
             }
             catch (ExceptionHandler exceptionHandler)
             {
@@ -79,7 +79,7 @@ namespace BooksManager.Services.ApiBook.Controllers
         /// <summary>
         /// Método responsável por alterar log com detalhes da homologação
         /// </summary>
-        /// <param name="bookViewModel"></param>
+        /// <param name="customerViewModel"></param>
         /// <response code="200">Ok</response>
         /// <response code="400">Bad Request</response>
         /// <response code="401">Unauthorized</response>
@@ -87,17 +87,17 @@ namespace BooksManager.Services.ApiBook.Controllers
         /// <response code="500">Internal Server Error</response>
         /// <returns>Result</returns>
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody]BookViewModel bookViewModel)
+        public async Task<IActionResult> Put([FromBody]CustomerViewModel customerViewModel)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest();
 
-                var bookViewModelResult = await _bookAppService.UpdateAsync(bookViewModel);
+                var customerViewModelResult = await _customerAppService.UpdateAsync(customerViewModel);
 
-                if (bookViewModelResult?.Data == null) return BadRequest(new { message = "A problem occurred during updating the data." });
+                if (customerViewModelResult?.Data == null) return BadRequest(new { message = "A problem occurred during updating the data." });
 
-                return Ok(bookViewModelResult.Data);
+                return Ok(customerViewModelResult.Data);
             }
             catch (ExceptionHandler exceptionHandler)
             {
@@ -120,7 +120,7 @@ namespace BooksManager.Services.ApiBook.Controllers
         {
             try
             {
-                await _bookAppService.RemoveAsync(id);
+                await _customerAppService.RemoveAsync(id);
 
                 return NoContent();
             }

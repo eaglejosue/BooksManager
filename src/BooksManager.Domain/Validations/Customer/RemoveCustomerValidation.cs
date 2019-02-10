@@ -1,8 +1,8 @@
 ﻿namespace BooksManager.Domain.Validations.Customer
 {
-    public class RemoveCustomerValidation : CustomerValidation<Entities.Customer>
+    public class RemoveBookValidation : BookValidation<Entities.Customer>
     {
-        public RemoveCustomerValidation()
+        public RemoveBookValidation()
         {
             ValidateId();
         }

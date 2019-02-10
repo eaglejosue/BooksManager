@@ -1,8 +1,8 @@
 ﻿namespace BooksManager.Domain.Validations.Customer
 {
-    public class UpdateCustomerValidation : CustomerValidation<Entities.Customer>
+    public class UpdateBookValidation : BookValidation<Entities.Customer>
     {
-        public UpdateCustomerValidation()
+        public UpdateBookValidation()
         {
             ValidateId();
             ValidateName();
