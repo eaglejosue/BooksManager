@@ -22,9 +22,9 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("customer-management/list-all")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allBookViewModelsResult = await _bookAppService.GetAllAsync();
+            var allBookViewModelsResult = _bookAppService.GetAll();
 
             if (allBookViewModelsResult?.Data == null) return NotFound();
 
@@ -34,11 +34,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("customer-management/customer-details/{id:long}")]
-        public async Task<IActionResult> Details(long? id)
+        public IActionResult Details(long? id)
         {
             if (id == null) return NotFound();
 
-            var bookViewModelResult = await _bookAppService.GetByIdAsync(id.Value);
+            var bookViewModelResult = _bookAppService.GetById(id.Value);
 
             if (bookViewModelResult?.Data == null) return NotFound();
 
@@ -56,11 +56,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpPost]
         ////[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/register-new")]
-        public async Task<IActionResult> Create(BookViewModel bookViewModel)
+        public IActionResult Create(BookViewModel bookViewModel)
         {
             if (!ModelState.IsValid) return View(bookViewModel);
 
-            var bookViewModelResult = await _bookAppService.AddAsync(bookViewModel);
+            var bookViewModelResult = _bookAppService.Add(bookViewModel);
 
             if (bookViewModelResult?.Data == null) return NotFound();
 
@@ -70,11 +70,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpGet]
         //[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/edit-customer/{id:long}")]
-        public async Task<IActionResult> Edit(long? id)
+        public IActionResult Edit(long? id)
         {
             if (id == null) return NotFound();
 
-            var bookViewModelResult = await _bookAppService.GetByIdAsync(id.Value);
+            var bookViewModelResult = _bookAppService.GetById(id.Value);
 
             if (bookViewModelResult?.Data == null) return NotFound();
 
@@ -84,11 +84,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpPost]
         //[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/edit-customer/{id:long}")]
-        public async Task<IActionResult> Edit(BookViewModel bookViewModel)
+        public IActionResult Edit(BookViewModel bookViewModel)
         {
             if (!ModelState.IsValid) return View(bookViewModel);
 
-            await _bookAppService.UpdateAsync(bookViewModel);
+            _bookAppService.Update(bookViewModel);
 
             ViewBag.Sucesso = "Customer Updated!";
 
@@ -98,11 +98,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpGet]
         //[Authorize(Policy = "CanRemoveCustomerData")]
         [Route("customer-management/remove-customer/{id:long}")]
-        public async Task<IActionResult> Delete(long? id)
+        public IActionResult Delete(long? id)
         {
             if (id == null) return NotFound();
 
-            var bookViewModelResult = await _bookAppService.GetByIdAsync(id.Value);
+            var bookViewModelResult = _bookAppService.GetById(id.Value);
 
             if (bookViewModelResult?.Data == null) return NotFound();
 
@@ -112,11 +112,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpPost, ActionName("Delete")]
         //[Authorize(Policy = "CanRemoveCustomerData")]
         [Route("customer-management/remove-customer/{id:long}")]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public IActionResult DeleteConfirmed(long id)
         {
             try
             {
-                await _bookAppService.RemoveAsync(id);
+                _bookAppService.Remove(id);
 
                 ViewBag.Sucesso = "Customer Removed!";
 
@@ -124,7 +124,7 @@ namespace BooksManager.Presentation.Site.Controllers
             }
             catch (ExceptionHandler)
             {
-                return View(await _bookAppService.GetByIdAsync(id));
+                return View(_bookAppService.GetById(id));
             }
         }
     }
