@@ -2,8 +2,5 @@
 
 namespace BooksManager.Domain.Interfaces.Repository
 {
-    public interface IBookRepository : IRepository<Book>
-    {
-
-    }
+    public interface IBookRepository : IRepository<Book> { }
 }

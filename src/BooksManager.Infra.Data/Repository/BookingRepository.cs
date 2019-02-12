@@ -4,9 +4,8 @@ using BooksManager.Infra.Data.Context;
 
 namespace BooksManager.Infra.Data.Repository
 {
-    class BookingRepository : Repository<Booking>, IBookingRepository
+    public class BookingRepository : Repository<Booking>, IBookingRepository
     {
-        public BookingRepository(BooksManagerContext context)
-            : base(context) { }
+        public BookingRepository(BooksManagerContext context) : base(context) { }
     }
 }

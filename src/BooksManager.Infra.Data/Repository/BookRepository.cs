@@ -6,7 +6,6 @@ namespace BooksManager.Infra.Data.Repository
 {
     public class BookRepository : Repository<Book>, IBookRepository
     {
-        public BookRepository(BooksManagerContext context)
-            : base(context) { }
+        public BookRepository(BooksManagerContext context) : base(context) { }
     }
 }

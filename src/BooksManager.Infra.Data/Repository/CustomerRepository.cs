@@ -8,8 +8,7 @@ namespace BooksManager.Infra.Data.Repository
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
-        public CustomerRepository(BooksManagerContext context)
-            : base(context) {}
+        public CustomerRepository(BooksManagerContext context) : base(context) {}
 
         public Customer GetByEmail(string email)
         {

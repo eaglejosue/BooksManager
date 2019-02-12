@@ -28,19 +28,19 @@ namespace BooksManager.Domain.Tests.Customer
             _mock = new Mock<ICustomerService>(MockBehavior.Strict);
 
             // Define retorno válido no Mock
-            _mock.Setup(c => c.AddAsync(_customerToAddValid))
-                .Returns(() => new SuccessResult<Entities.Customer>(_customerToAddValid).ToTask());
+            _mock.Setup(c => c.Add(_customerToAddValid))
+                .Returns(() => new Result<Entities.Customer>(_customerToAddValid, true));
         }
 
         [TestMethod]
-        public async void NewCustomerIsValid()
+        public void NewCustomerIsValid()
         {
             IResult<Entities.Customer> customerResult = null;
             Entities.Customer customerActual = null;
 
             try
             {
-                customerResult = await _mock.Object.AddAsync(_customerToAddValid);
+                customerResult = _mock.Object.Add(_customerToAddValid);
                 customerActual = customerResult.Data;
             }
             catch (System.Exception ex)
@@ -51,7 +51,8 @@ namespace BooksManager.Domain.Tests.Customer
             Assert.IsNotNull(customerResult);
             Assert.AreEqual(true, customerResult.Success);
 
-            Assert.AreNotEqual(_customerToAddValid.Id, customerActual.Id);
+            Assert.IsNotNull(customerActual);
+            Assert.AreEqual(_customerToAddValid.Id, customerActual.Id);
             Assert.AreEqual(_customerToAddValid.Name, customerActual.Name);
             Assert.AreEqual(_customerToAddValid.Email, customerActual.Email);
             Assert.AreEqual(_customerToAddValid.Telephone, customerActual.Telephone);
