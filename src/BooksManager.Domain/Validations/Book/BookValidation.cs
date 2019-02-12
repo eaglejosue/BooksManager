@@ -1,13 +1,11 @@
 ﻿using FluentValidation;
-using System;
-
 namespace BooksManager.Domain.Validations.Book
 {
     public abstract class BookValidation<T> : AbstractValidator<T> where T : Entities.Book
     {
         protected void ValidateName()
         {
-            RuleFor(c => c.Name)
+            RuleFor(c => c.Title)
                 .NotEmpty().WithMessage("Please ensure you have entered the Name")
                 .Length(2, 100).WithMessage("The Name must have between 2 and 100 characters");
         }

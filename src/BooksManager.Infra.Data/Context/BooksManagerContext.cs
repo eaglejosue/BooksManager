@@ -1,8 +1,6 @@
 ﻿using BooksManager.Domain.Entities;
 using BooksManager.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 using System.Linq;
 
 namespace BooksManager.Infra.Data.Context
@@ -12,6 +10,12 @@ namespace BooksManager.Infra.Data.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Book> Book { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+
+        public BooksManagerContext()
+        {
+            // Irá criar o banco e a estrutura de tabelas necessárias
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

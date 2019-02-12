@@ -7,6 +7,7 @@ using System;
 using AutoMapper;
 using BooksManager.Domain.Interfaces;
 using BooksManager.Domain.Entities;
+using AutoMapper.QueryableExtensions;
 
 namespace BooksManager.Application.Services
 {
@@ -32,8 +33,8 @@ namespace BooksManager.Application.Services
 
         public async Task<IResult<BookViewModel>> GetByIdAsync(long id)
         {
-            var customerResult = await _bookService.GetByIdAsync(id);
-            var bookViewModel = _mapper.Map<BookViewModel>(customerResult.Data);
+            var bookResult = await _bookService.GetByIdAsync(id);
+            var bookViewModel = _mapper.Map<BookViewModel>(bookResult.Data);
             return new SuccessResult<BookViewModel>(bookViewModel);
         }
 

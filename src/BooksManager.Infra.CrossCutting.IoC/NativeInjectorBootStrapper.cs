@@ -26,9 +26,9 @@ namespace BooksManager.Infra.CrossCutting.IoC
             services.AddScoped<IBookService, BookService>();
 
             // Infra - Data
+            services.AddScoped<BooksManagerContext>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<BooksManagerContext>();
         }
     }
 }

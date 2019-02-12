@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BooksManager.Presentation.Site.Controllers
 {
-    //[Authorize]
+    ////[Authorize]
+    //[Route("api/[controller]")]
     public class CustomerController : Controller
     {
         private readonly ICustomerAppService _customerAppService;
@@ -45,7 +46,7 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Policy = "CanWriteCustomerData")]
+        ////[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/register-new")]
         public IActionResult Create()
         {
@@ -53,9 +54,9 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "CanWriteCustomerData")]
+        ////[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/register-new")]
-        [ValidateAntiForgeryToken]
+        ////[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CustomerViewModel customerViewModel)
         {
             if (!ModelState.IsValid) return View(customerViewModel);
@@ -68,7 +69,7 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "CanWriteCustomerData")]
+        //[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/edit-customer/{id:guid}")]
         public async Task<IActionResult> Edit(long? id)
         {
@@ -82,9 +83,9 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "CanWriteCustomerData")]
+        //[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/edit-customer/{id:guid}")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CustomerViewModel customerViewModel)
         {
             if (!ModelState.IsValid) return View(customerViewModel);
@@ -97,7 +98,7 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "CanRemoveCustomerData")]
+        //[Authorize(Policy = "CanRemoveCustomerData")]
         [Route("customer-management/remove-customer/{id:guid}")]
         public async Task<IActionResult> Delete(long? id)
         {
@@ -111,9 +112,9 @@ namespace BooksManager.Presentation.Site.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Policy = "CanRemoveCustomerData")]
+        //[Authorize(Policy = "CanRemoveCustomerData")]
         [Route("customer-management/remove-customer/{id:guid}")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             try

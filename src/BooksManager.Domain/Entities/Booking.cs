@@ -1,7 +1,6 @@
 ﻿using BooksManager.Domain.Exception;
 using BooksManager.Domain.Models;
 using BooksManager.Domain.ValueObjects;
-using System;
 
 namespace BooksManager.Domain.Entities
 {

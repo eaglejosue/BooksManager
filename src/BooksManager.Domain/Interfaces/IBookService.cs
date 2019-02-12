@@ -10,8 +10,8 @@ namespace BooksManager.Domain.Interfaces
     {
         Task<IResult<IQueryable<Book>>> GetAllAsync();
         Task<IResult<Book>> GetByIdAsync(long id);
-        Task<IResult<Book>> AddAsync(Book customer);
-        Task<IResult<Book>> UpdateAsync(Book customer);
+        Task<IResult<Book>> AddAsync(Book book);
+        Task<IResult<Book>> UpdateAsync(Book book);
         Task<IResult<long>> RemoveAsync(long id);
     }
 }

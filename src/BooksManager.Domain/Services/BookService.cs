@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Net;
 using BooksManager.Domain.Exception;
+using BooksManager.Domain.Validations.Book;
 
 namespace BooksManager.Domain.Services
 {
@@ -37,7 +38,7 @@ namespace BooksManager.Domain.Services
 
         public Task<IResult<Book>> AddAsync(Book book)
         {
-            var bookValidationResult = new AddNewBookValidation().Validate(book);
+            var bookValidationResult = new AddNewBookingValidation().Validate(book);
             if (!bookValidationResult.IsValid)
                 return new ErrorResult<Book>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 
@@ -68,7 +69,7 @@ namespace BooksManager.Domain.Services
             var book = _bookRepository.GetById(id);
             if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
 
-            var bookValidationResult = new RemoveBookValidation().Validate(book);
+            var bookValidationResult = new RemoveBookingValidation().Validate(book);
             if (!bookValidationResult.IsValid)
                 return new ErrorResult<long>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 
