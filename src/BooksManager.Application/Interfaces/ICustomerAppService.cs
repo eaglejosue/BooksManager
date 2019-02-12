@@ -13,5 +13,11 @@ namespace BooksManager.Application.Interfaces
         Task<IResult<CustomerViewModel>> AddAsync(CustomerViewModel customerViewModel);
         Task<IResult<CustomerViewModel>> UpdateAsync(CustomerViewModel customerViewModel);
         Task<IResult<long>> RemoveAsync(long id);
+
+        IResult<IEnumerable<CustomerViewModel>> GetAll();
+        IResult<CustomerViewModel> GetById(long id);
+        IResult<CustomerViewModel> Add(CustomerViewModel customerViewModel);
+        IResult<CustomerViewModel> Update(CustomerViewModel customerViewModel);
+        IResult<long> Remove(long id);
     }
 }

@@ -13,5 +13,11 @@ namespace BooksManager.Application.Interfaces
         Task<IResult<BookingViewModel>> AddAsync(BookingViewModel bookingViewModel);
         Task<IResult<BookingViewModel>> UpdateAsync(BookingViewModel bookingViewModel);
         Task<IResult<long>> RemoveAsync(long id);
+
+        IResult<IEnumerable<BookingViewModel>> GetAll();
+        IResult<BookingViewModel> GetById(long id);
+        IResult<BookingViewModel> Add(BookingViewModel bookingViewModel);
+        IResult<BookingViewModel> Update(BookingViewModel bookingViewModel);
+        IResult<long> Remove(long id);
     }
 }

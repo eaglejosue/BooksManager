@@ -59,6 +59,44 @@ namespace BooksManager.Application.Services
             return _bookService.RemoveAsync(id);
         }
 
+
+        public IResult<IEnumerable<BookViewModel>> GetAll()
+        {
+            var allBooksResult = _bookService.GetAll();
+            var allBookViewModels = allBooksResult.Data.ProjectTo<BookViewModel>();
+            return new SuccessResult<IEnumerable<BookViewModel>>(allBookViewModels);
+        }
+
+        public IResult<BookViewModel> GetById(long id)
+        {
+            var bookResult = _bookService.GetById(id);
+            var bookViewModel = _mapper.Map<BookViewModel>(bookResult.Data);
+            return new SuccessResult<BookViewModel>(bookViewModel);
+        }
+
+        public IResult<BookViewModel> Add(BookViewModel bookViewModel)
+        {
+            var book = _mapper.Map<Book>(bookViewModel);
+            var bookResult = _bookService.Add(book);
+            bookViewModel = _mapper.Map<BookViewModel>(bookResult.Data);
+            return new SuccessResult<BookViewModel>(bookViewModel);
+        }
+
+        public IResult<BookViewModel> Update(BookViewModel bookViewModel)
+        {
+            var book = _mapper.Map<Book>(bookViewModel);
+            var bookResult = _bookService.Update(book);
+            bookViewModel = _mapper.Map<BookViewModel>(bookResult.Data);
+            return new SuccessResult<BookViewModel>(bookViewModel);
+        }
+
+        public IResult<long> Remove(long id)
+        {
+            return _bookService.Remove(id);
+        }
+
+
+
         public void Dispose() => GC.SuppressFinalize(this);
     }
 }

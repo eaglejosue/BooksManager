@@ -13,5 +13,11 @@ namespace BooksManager.Domain.Interfaces
         Task<IResult<Book>> AddAsync(Book book);
         Task<IResult<Book>> UpdateAsync(Book book);
         Task<IResult<long>> RemoveAsync(long id);
+
+        IResult<IQueryable<Book>> GetAll();
+        IResult<Book> GetById(long id);
+        IResult<Book> Add(Book book);
+        IResult<Book> Update(Book book);
+        IResult<long> Remove(long id);
     }
 }

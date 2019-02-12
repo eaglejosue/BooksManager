@@ -59,6 +59,44 @@ namespace BooksManager.Application.Services
             return _customerService.RemoveAsync(id);
         }
 
+
+        public IResult<IEnumerable<CustomerViewModel>> GetAll()
+        {
+            var allCustomersResult = _customerService.GetAll();
+            var allCustomerViewModels = allCustomersResult.Data.ProjectTo<CustomerViewModel>();
+            return new SuccessResult<IEnumerable<CustomerViewModel>>(allCustomerViewModels);
+        }
+
+        public IResult<CustomerViewModel> GetById(long id)
+        {
+            var customerResult = _customerService.GetById(id);
+            var customerViewModel = _mapper.Map<CustomerViewModel>(customerResult.Data);
+            return new SuccessResult<CustomerViewModel>(customerViewModel);
+        }
+
+        public IResult<CustomerViewModel> Add(CustomerViewModel customerViewModel)
+        {
+            var customer = _mapper.Map<Customer>(customerViewModel);
+            var customerResult = _customerService.Add(customer);
+            customerViewModel = _mapper.Map<CustomerViewModel>(customerResult.Data);
+            return new SuccessResult<CustomerViewModel>(customerViewModel);
+        }
+
+        public IResult<CustomerViewModel> Update(CustomerViewModel customerViewModel)
+        {
+            var customer = _mapper.Map<Customer>(customerViewModel);
+            var customerResult = _customerService.Update(customer);
+            customerViewModel = _mapper.Map<CustomerViewModel>(customerResult.Data);
+            return new SuccessResult<CustomerViewModel>(customerViewModel);
+        }
+
+        public IResult<long> Remove(long id)
+        {
+            return _customerService.Remove(id);
+        }
+
+
+
         public void Dispose() => GC.SuppressFinalize(this);
     }
 }

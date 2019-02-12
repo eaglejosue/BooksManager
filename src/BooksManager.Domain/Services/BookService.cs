@@ -38,13 +38,13 @@ namespace BooksManager.Domain.Services
 
         public Task<IResult<Book>> AddAsync(Book book)
         {
-            var bookValidationResult = new AddNewBookingValidation().Validate(book);
+            var bookValidationResult = new AddNewBookValidation().Validate(book);
             if (!bookValidationResult.IsValid)
                 return new ErrorResult<Book>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
-
+            
             var bookEntity = _bookRepository.Add(book);
             if (!_unitOfWork.Commit()) throw new ExceptionHandler(HttpStatusCode.BadRequest, "A problem occurred during saving the data.");
-
+            
             return new SuccessResult<Book>(bookEntity).ToTask();
         }
 
@@ -69,7 +69,7 @@ namespace BooksManager.Domain.Services
             var book = _bookRepository.GetById(id);
             if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
 
-            var bookValidationResult = new RemoveBookingValidation().Validate(book);
+            var bookValidationResult = new RemoveBookValidation().Validate(book);
             if (!bookValidationResult.IsValid)
                 return new ErrorResult<long>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty).ToTask();
 
@@ -79,6 +79,65 @@ namespace BooksManager.Domain.Services
 
             return new SuccessResult<long>(id).ToTask();
         }
+
+
+        public IResult<IQueryable<Book>> GetAll()
+        {
+            var allBooks = _bookRepository.GetAll();
+            return new SuccessResult<IQueryable<Book>>(allBooks);
+        }
+
+        public IResult<Book> GetById(long id)
+        {
+            var book = _bookRepository.GetById(id);
+            return new SuccessResult<Book>(book);
+        }
+
+        public IResult<Book> Add(Book book)
+        {
+            var bookValidationResult = new AddNewBookValidation().Validate(book);
+            if (!bookValidationResult.IsValid)
+                return new ErrorResult<Book>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty);
+
+            var bookEntity = _bookRepository.Add(book);
+            if (!_unitOfWork.Commit()) throw new ExceptionHandler(HttpStatusCode.BadRequest, "A problem occurred during saving the data.");
+
+            return new SuccessResult<Book>(bookEntity);
+        }
+
+        public IResult<Book> Update(Book book)
+        {
+            var bookValidationResult = new UpdateBookValidation().Validate(book);
+            if (!bookValidationResult.IsValid)
+                return new ErrorResult<Book>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty);
+
+            if (_bookRepository.GetById(book.Id) == null)
+                throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
+
+            book = _bookRepository.Update(book);
+
+            if (!_unitOfWork.Commit()) throw new ExceptionHandler(HttpStatusCode.BadRequest, "A problem occurred during saving the data.");
+
+            return new SuccessResult<Book>(book);
+        }
+
+        public IResult<long> Remove(long id)
+        {
+            var book = _bookRepository.GetById(id);
+            if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
+
+            var bookValidationResult = new RemoveBookValidation().Validate(book);
+            if (!bookValidationResult.IsValid)
+                return new ErrorResult<long>(bookValidationResult.Errors.FirstOrDefault()?.ErrorMessage ?? string.Empty);
+
+            _bookRepository.Remove(id);
+
+            if (!_unitOfWork.Commit()) throw new ExceptionHandler(HttpStatusCode.BadRequest, "A problem occurred during saving the data.");
+
+            return new SuccessResult<long>(id);
+        }
+
+
 
         public void Dispose() => GC.SuppressFinalize(this);
     }

@@ -59,6 +59,44 @@ namespace BooksManager.Application.Services
             return _bookingService.RemoveAsync(id);
         }
 
+
+        public IResult<IEnumerable<BookingViewModel>> GetAll()
+        {
+            var allBookingsResult = _bookingService.GetAll();
+            var allBookingdViewModels = allBookingsResult.Data.ProjectTo<BookingViewModel>();
+            return new SuccessResult<IEnumerable<BookingViewModel>>(allBookingdViewModels);
+        }
+
+        public IResult<BookingViewModel> GetById(long id)
+        {
+            var bookingResult = _bookingService.GetById(id);
+            var bookingViewModel = _mapper.Map<BookingViewModel>(bookingResult.Data);
+            return new SuccessResult<BookingViewModel>(bookingViewModel);
+        }
+
+        public IResult<BookingViewModel> Add(BookingViewModel bookingViewModel)
+        {
+            var booking = _mapper.Map<Booking>(bookingViewModel);
+            var bookingResult = _bookingService.Add(booking);
+            bookingViewModel = _mapper.Map<BookingViewModel>(bookingResult.Data);
+            return new SuccessResult<BookingViewModel>(bookingViewModel);
+        }
+
+        public IResult<BookingViewModel> Update(BookingViewModel bookingViewModel)
+        {
+            var booking = _mapper.Map<Booking>(bookingViewModel);
+            var bookingResult = _bookingService.Update(booking);
+            bookingViewModel = _mapper.Map<BookingViewModel>(bookingResult.Data);
+            return new SuccessResult<BookingViewModel>(bookingViewModel);
+        }
+
+        public IResult<long> Remove(long id)
+        {
+            return _bookingService.Remove(id);
+        }
+
+
+
         public void Dispose() => GC.SuppressFinalize(this);
     }
 }

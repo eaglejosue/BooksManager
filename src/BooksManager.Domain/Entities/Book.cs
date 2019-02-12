@@ -21,7 +21,7 @@ namespace BooksManager.Domain.Entities
         public ICollection<Booking> Bookings { get; private set; }
 
         public Book(long id, string title, string description, decimal price, string author, int year, 
-            string publisher, int edition, string tag, string summary, /*byte[] image*/)
+            string publisher, int edition, string tag, string summary/*, byte[] image*/)
         {
             Id = id;
             Title = title;

@@ -22,9 +22,9 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("customer-management/list-all")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allCustomerViewModelResult = await _customerAppService.GetAllAsync();
+            var allCustomerViewModelResult = _customerAppService.GetAll();
 
             if (allCustomerViewModelResult?.Data == null) return NotFound();
 
@@ -33,12 +33,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("customer-management/customer-details/{id:guid}")]
-        public async Task<IActionResult> Details(long? id)
+        [Route("customer-management/customer-details/{id:long}")]
+        public IActionResult Details(long? id)
         {
             if (id == null) return NotFound();
 
-            var customerViewModelResult = await _customerAppService.GetByIdAsync(id.Value);
+            var customerViewModelResult = _customerAppService.GetById(id.Value);
 
             if (customerViewModelResult?.Data == null) return NotFound();
 
@@ -56,12 +56,11 @@ namespace BooksManager.Presentation.Site.Controllers
         [HttpPost]
         ////[Authorize(Policy = "CanWriteCustomerData")]
         [Route("customer-management/register-new")]
-        ////[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CustomerViewModel customerViewModel)
+        public IActionResult Create(CustomerViewModel customerViewModel)
         {
             if (!ModelState.IsValid) return View(customerViewModel);
 
-            var customerViewModelResult = await _customerAppService.AddAsync(customerViewModel);
+            var customerViewModelResult = _customerAppService.Add(customerViewModel);
 
             if (customerViewModelResult?.Data == null) return NotFound();
 
@@ -70,12 +69,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         //[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/edit-customer/{id:guid}")]
-        public async Task<IActionResult> Edit(long? id)
+        [Route("customer-management/edit-customer/{id:long}")]
+        public IActionResult Edit(long? id)
         {
             if (id == null) return NotFound();
 
-            var customerViewModelResult = await _customerAppService.GetByIdAsync(id.Value);
+            var customerViewModelResult = _customerAppService.GetById(id.Value);
 
             if (customerViewModelResult?.Data == null) return NotFound();
 
@@ -84,13 +83,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/edit-customer/{id:guid}")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(CustomerViewModel customerViewModel)
+        [Route("customer-management/edit-customer/{id:long}")]
+        public IActionResult Edit(CustomerViewModel customerViewModel)
         {
             if (!ModelState.IsValid) return View(customerViewModel);
 
-            await _customerAppService.UpdateAsync(customerViewModel);
+            _customerAppService.Update(customerViewModel);
 
             ViewBag.Sucesso = "Customer Updated!";
 
@@ -99,12 +97,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         //[Authorize(Policy = "CanRemoveCustomerData")]
-        [Route("customer-management/remove-customer/{id:guid}")]
-        public async Task<IActionResult> Delete(long? id)
+        [Route("customer-management/remove-customer/{id:long}")]
+        public IActionResult Delete(long? id)
         {
             if (id == null) return NotFound();
 
-            var customerViewModelResult = await _customerAppService.GetByIdAsync(id.Value);
+            var customerViewModelResult = _customerAppService.GetById(id.Value);
 
             if (customerViewModelResult?.Data == null) return NotFound();
 
@@ -113,13 +111,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpPost, ActionName("Delete")]
         //[Authorize(Policy = "CanRemoveCustomerData")]
-        [Route("customer-management/remove-customer/{id:guid}")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        [Route("customer-management/remove-customer/{id:long}")]
+        public IActionResult DeleteConfirmed(long id)
         {
             try
             {
-                await _customerAppService.RemoveAsync(id);
+                _customerAppService.Remove(id);
 
                 ViewBag.Sucesso = "Customer Removed!";
 
@@ -127,7 +124,7 @@ namespace BooksManager.Presentation.Site.Controllers
             }
             catch (ExceptionHandler)
             {
-                return View(_customerAppService.GetByIdAsync(id));
+                return View(_customerAppService.GetById(id));
             }
         }
     }

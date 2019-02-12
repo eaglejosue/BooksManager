@@ -1,7 +1,7 @@
-@model IEnumerable<BooksManager.Application.ViewModels.CustomerViewModel>
+@model IEnumerable<BooksManager.Application.ViewModels.BookingViewModel>
 
 @{
-    ViewData["Title"] = "Customer Management";
+    ViewData["Title"] = "Booking Management";
 }
 
 <div>
@@ -27,13 +27,25 @@
         <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.BookingPeriod.Start)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.BookingPeriod.End)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Year)
             </th>
             <th></th>
         </tr>
@@ -43,13 +55,25 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayNameFor(model => model.BookingPeriod.Start)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayNameFor(model => model.BookingPeriod.End)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
+                    @Html.DisplayNameFor(model => model.Price)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Book.Description)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Book.Author)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Book.Year)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
@@ -63,30 +87,10 @@
                     <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
-                    
-                    <button type="button" class="btn btn-purple viewbutton" title="History" data-id="@item.Id" data-toggle="modal" data-target="#customerHistory">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </button>
+
                 </td>
             </tr>
         }
         </tbody>
     </table>
-</div>
-
-<div class="modal fade" id="customerHistory" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Customer Data History</h4>
-            </div>
-            <div class="modal-body">
-                <p id="customerHistoryData"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>

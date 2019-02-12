@@ -1,0 +1,108 @@
+@model IEnumerable<BooksManager.Application.ViewModels.BookViewModel>
+
+@{
+    ViewData["Title"] = "Book Management";
+}
+
+<div>
+    <h2>@ViewData["Title"]</h2>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="Create" class="btn btn-primary">
+                    <span title="Register New" class="glyphicon glyphicon-plus-sign"></span> Register New
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Summary)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Title)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Description)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Price)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Author)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Year)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Edition)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Tag)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                        
+                    <a asp-action="Details" asp-route-id="@item.Id" title="Details" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                        
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
