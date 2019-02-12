@@ -67,7 +67,7 @@ namespace BooksManager.Domain.Services
         public Task<IResult<long>> RemoveAsync(long id)
         {
             var book = _bookRepository.GetById(id);
-            if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
+            if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {id} not found.");
 
             var bookValidationResult = new RemoveBookValidation().Validate(book);
             if (!bookValidationResult.IsValid)
@@ -124,7 +124,7 @@ namespace BooksManager.Domain.Services
         public IResult<long> Remove(long id)
         {
             var book = _bookRepository.GetById(id);
-            if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {book.Id} not found.");
+            if (book == null) throw new ExceptionHandler(HttpStatusCode.NotFound, $"Book id {id} not found.");
 
             var bookValidationResult = new RemoveBookValidation().Validate(book);
             if (!bookValidationResult.IsValid)

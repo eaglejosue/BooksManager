@@ -1,7 +1,10 @@
 ﻿using BooksManager.Infra.CrossCutting.IoC;
+using BooksManager.Infra.Data.Context;
+using BooksManager.Services.ApiBook.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +24,11 @@ namespace BooksManager.Services.ApiBook
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAutoMapperSetup();
+
+            services.AddDbContext<BooksManagerContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // .NET Native DI Abstraction
             RegisterServices(services);

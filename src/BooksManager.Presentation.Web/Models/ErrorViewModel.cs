@@ -1,6 +1,4 @@
-using System;
-
-namespace BooksManager.Presentation.Site.Models
+namespace BooksManager.Presentation.Web.Models
 {
     public class ErrorViewModel
     {

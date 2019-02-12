@@ -19,7 +19,7 @@ namespace BooksManager.Domain.Validations.Book
         protected void ValidatePrice()
         {
             RuleFor(b => b.Price)
-                .NotEqual(decimal.Zero);
+                .GreaterThan(decimal.Zero);
         }
 
         protected void ValidateId()

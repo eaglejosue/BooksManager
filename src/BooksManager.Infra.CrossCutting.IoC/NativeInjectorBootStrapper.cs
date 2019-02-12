@@ -19,6 +19,8 @@ namespace BooksManager.Infra.CrossCutting.IoC
             services.AddSingleton(Mapper.Configuration);
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
             services.AddScoped<ICustomerAppService, CustomerAppService>();
+            services.AddScoped<IBookingAppService, BookingAppService>();
+            services.AddScoped<IBookAppService, BookAppService>();
 
             // Domain
             services.AddScoped<ICustomerService, CustomerService>();
@@ -27,8 +29,10 @@ namespace BooksManager.Infra.CrossCutting.IoC
 
             // Infra - Data
             services.AddScoped<BooksManagerContext>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
         }
     }
 }

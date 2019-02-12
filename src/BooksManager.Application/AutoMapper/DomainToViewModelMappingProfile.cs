@@ -9,6 +9,11 @@ namespace BooksManager.Application.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Customer, CustomerViewModel>();
+
+            CreateMap<Book, BookViewModel>();
+
+            CreateMap<Booking, BookingViewModel>()
+                .IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
         }
     }
 }

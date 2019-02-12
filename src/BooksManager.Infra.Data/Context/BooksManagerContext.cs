@@ -1,9 +1,11 @@
-﻿using System.IO;
-using BooksManager.Domain.Entities;
+﻿using BooksManager.Domain.Entities;
 using BooksManager.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
+
+//// Descomentar para usar o Migrations
+//using System.IO;
+//using Microsoft.Extensions.Configuration;
 
 namespace BooksManager.Infra.Data.Context
 {
@@ -13,7 +15,7 @@ namespace BooksManager.Infra.Data.Context
         public DbSet<Book> Book { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 
-        //public BooksManagerContext(DbContextOptions options) : base(options) { }
+        public BooksManagerContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

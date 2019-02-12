@@ -1,4 +1,4 @@
-﻿namespace BooksManager.Domain.Validations.Book
+﻿namespace BooksManager.Domain.Validations.Booking
 {
     public class UpdateBookingValidation : BookingValidation<Entities.Booking>
     {

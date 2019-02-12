@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace BooksManager.Domain.Validations.Book
+namespace BooksManager.Domain.Validations.Booking
 {
     public abstract class BookingValidation<T> : AbstractValidator<T> where T : Entities.Booking
     {
@@ -21,12 +21,18 @@ namespace BooksManager.Domain.Validations.Book
         protected void ValidatePrice()
         {
             RuleFor(b => b.Price)
-                .NotEqual(decimal.Zero);
+                .GreaterThan(decimal.Zero);
         }
 
         protected void ValidateBookId()
         {
             RuleFor(b => b.BookId)
+                .NotEqual(0);
+        }
+
+        protected void ValidateCustomerId()
+        {
+            RuleFor(b => b.Customer.Id)
                 .NotEqual(0);
         }
 

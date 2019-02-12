@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BooksManager.Application.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-using BooksManager.Domain.Exception;
+﻿using BooksManager.Application.Interfaces;
 using BooksManager.Application.ViewModels;
+using BooksManager.Domain.Exception;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BooksManager.Presentation.Site.Controllers
+namespace BooksManager.Presentation.Web.Controllers
 {
     //[Authorize]
     //[Route("api/[controller]")]
@@ -21,7 +20,7 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("customer-management/list-all")]
+        [Route("book-management/list-all")]
         public IActionResult Index()
         {
             var allBookViewModelsResult = _bookAppService.GetAll();
@@ -33,7 +32,7 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("customer-management/customer-details/{id:long}")]
+        [Route("book-management/book-details/{id:long}")]
         public IActionResult Details(long? id)
         {
             if (id == null) return NotFound();
@@ -47,7 +46,7 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpGet]
         ////[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/register-new")]
+        [Route("book-management/register-new")]
         public IActionResult Create()
         {
             return View();
@@ -55,7 +54,7 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpPost]
         ////[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/register-new")]
+        [Route("book-management/register-new")]
         public IActionResult Create(BookViewModel bookViewModel)
         {
             if (!ModelState.IsValid) return View(bookViewModel);
@@ -64,12 +63,12 @@ namespace BooksManager.Presentation.Site.Controllers
 
             if (bookViewModelResult?.Data == null) return NotFound();
 
-            return View(bookViewModelResult?.Data);
+            return View(bookViewModelResult.Data);
         }
 
         [HttpGet]
         //[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/edit-customer/{id:long}")]
+        [Route("book-management/edit-book/{id:long}")]
         public IActionResult Edit(long? id)
         {
             if (id == null) return NotFound();
@@ -83,21 +82,21 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management/edit-customer/{id:long}")]
+        [Route("book-management/edit-book/{id:long}")]
         public IActionResult Edit(BookViewModel bookViewModel)
         {
             if (!ModelState.IsValid) return View(bookViewModel);
 
             _bookAppService.Update(bookViewModel);
 
-            ViewBag.Sucesso = "Customer Updated!";
+            ViewBag.Sucesso = "Book Updated!";
 
             return View(bookViewModel);
         }
 
         [HttpGet]
         //[Authorize(Policy = "CanRemoveCustomerData")]
-        [Route("customer-management/remove-customer/{id:long}")]
+        [Route("book-management/remove-book/{id:long}")]
         public IActionResult Delete(long? id)
         {
             if (id == null) return NotFound();
@@ -111,20 +110,20 @@ namespace BooksManager.Presentation.Site.Controllers
 
         [HttpPost, ActionName("Delete")]
         //[Authorize(Policy = "CanRemoveCustomerData")]
-        [Route("customer-management/remove-customer/{id:long}")]
+        [Route("book-management/remove-book/{id:long}")]
         public IActionResult DeleteConfirmed(long id)
         {
             try
             {
                 _bookAppService.Remove(id);
 
-                ViewBag.Sucesso = "Customer Removed!";
+                ViewBag.Sucesso = "Book Removed!";
 
                 return RedirectToAction("Index");
             }
             catch (ExceptionHandler)
             {
-                return View(_bookAppService.GetById(id));
+                return View(_bookAppService.GetById(id).Data);
             }
         }
     }

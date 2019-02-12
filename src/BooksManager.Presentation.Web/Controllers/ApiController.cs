@@ -1,8 +1,8 @@
 ﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
 using BooksManager.Domain.Exception;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BooksManager.Presentation.Site.Controllers
+namespace BooksManager.Presentation.Web.Controllers
 {
     public class ApiController : ControllerBase
     {

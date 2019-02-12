@@ -3,11 +3,10 @@ using BooksManager.Application.ViewModels;
 using BooksManager.Domain.Exception;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
-namespace BooksManager.Presentation.Site.Controllers
+namespace BooksManager.Presentation.Web.Controllers
 {
-    ////[Authorize]
+    //[Authorize]
     //[Route("api/[controller]")]
     public class CustomerController : Controller
     {
@@ -64,7 +63,7 @@ namespace BooksManager.Presentation.Site.Controllers
 
             if (customerViewModelResult?.Data == null) return NotFound();
 
-            return View(customerViewModelResult?.Data);
+            return View(customerViewModelResult.Data);
         }
 
         [HttpGet]
@@ -124,7 +123,7 @@ namespace BooksManager.Presentation.Site.Controllers
             }
             catch (ExceptionHandler)
             {
-                return View(_customerAppService.GetById(id));
+                return View(_customerAppService.GetById(id).Data);
             }
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
+using BooksManager.Presentation.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using BooksManager.Presentation.Site.Models;
 
-namespace BooksManager.Presentation.Site.Controllers
+namespace BooksManager.Presentation.Web.Controllers
 {
+    [Route("home")]
     public class HomeController : Controller
     {
         [Route("welcome")]

@@ -1,5 +1,6 @@
 using BooksManager.Infra.CrossCutting.IoC;
 using BooksManager.Infra.Data.Context;
+using BooksManager.Presentation.Web.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,8 +31,9 @@ namespace BooksManager.Presentation.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAutoMapperSetup();
 
             services.AddDbContext<BooksManagerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

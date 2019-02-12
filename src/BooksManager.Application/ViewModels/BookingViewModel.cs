@@ -27,5 +27,9 @@ namespace BooksManager.Application.ViewModels
         [DataType(DataType.Currency, ErrorMessage = "Price em formato inválido")]
         [DisplayName("Price")]
         public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "The BookId is Required")]
+        [DisplayName("CustomerId")]
+        public long CustomerId { get; set; }
     }
 }

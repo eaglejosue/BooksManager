@@ -18,7 +18,7 @@ namespace BooksManager.Domain.Entities
         public string Summary { get; private set; }
         //public byte[] Image { get; private set; }
 
-        public ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
 
         public Book(long id, string title, string description, decimal price, string author, int year, 
             string publisher, int edition, string tag, string summary/*, byte[] image*/)
