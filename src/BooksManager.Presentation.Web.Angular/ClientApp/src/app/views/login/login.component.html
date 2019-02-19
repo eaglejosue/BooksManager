@@ -1,0 +1,41 @@
+<div id="wrapper">
+  <div id="left">
+
+    <div id="login">
+
+      <div class="logo">
+        <img src="./images/logo.png" alt="logo">
+      </div>
+
+      <form (submit)="onSubmit()">
+        <div>
+          <label for="Email">E-mail ou usuário</label>
+          <input #userNameInput type="text" class="textinput">
+        </div>
+        <div>
+          <label for="Password">Senha</label>
+          <input #passwordInput type="password" class="textinput">
+        </div>
+        <button type="submit" class="primary-btn">Entrar</button>
+      </form>
+
+      <div class="links">
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+
+    </div>
+
+    <footer id="main-footer">
+      <p>&copy; LINX 2019 - Todos os direitos reservados</p>
+    </footer>
+
+  </div>
+
+  <div id="right">
+    <div id="message">
+      <div class="message-content">
+        <h1 class="message-text">Portal de homologações - Linx Conecta</h1>
+      </div>
+    </div>
+  </div>
+</div>
